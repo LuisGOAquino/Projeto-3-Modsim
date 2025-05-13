@@ -27,19 +27,19 @@ def modelo(Y, t):
     return L
 
 y0 = 38969           #Altura inicial do humano (m)
-v0 = 0            #Velocidade inicial (m/s)
+v0 = 0               #Velocidade inicial (m/s)
 Y0 = [y0, v0]        # Condicoes iniciais
 
 dt = 1
-tf = 400
+tf = 543
 lista_t = np.arange(0, tf, dt)
 
 q = odeint(modelo, Y0, lista_t)
 y_lista = q[:,0]
 vy_lista = abs(q[:,1])
 
-# print (y_lista)
-# print (vy_lista)
+#Implementação
+
 plt.plot(lista_t, y_lista)
 plt.title("Altura x Tempo")
 plt.xlabel("Tempo (segundos)")
@@ -54,18 +54,43 @@ plt.ylabel("Velocidade (m/s)")
 plt.grid()
 plt.show()
 
+#Validação
 
-# po = 1.225              #PEDIR NOME
-# ho = 7500               #PEDIR NOME
-# p = po*(e**(-y/ho))
+
+
+plt.plot(lista_t, y_lista, label = "Implementação")
+plt.plot(lista_t, y_real, 'ro', label = "Dados reais")
+plt.title("Altura x Tempo")
+plt.xlabel("Tempo (segundos)")
+plt.ylabel("Altura (metros) ")
+plt.grid()
+plt.legend()
+plt.show()
+
+plt.plot(lista_t, vy_lista, label = "Implementação")
+plt.plot(lista_t, vy_real, 'ro', label = "Dados reais")
+plt.title("Velocidade x Tempo")
+plt.xlabel("Tempo (segundos)")
+plt.ylabel("Velocidade (m/s)")
+plt.grid()
+plt.legend()
+plt.show()
 
 # a = np.arange(38969, 0, -10)
-
-# for al in a:
 
 # def densi(ly):
 #     r = []
 #     for al in ly:
 #         p = po*(e**(-al/ho))
+#         r.append(p)
+#     return r
+
+# k = densi(a)
+
+# plt.plot(a, k)
+# plt.title("Densidade do ar x Altura")
+# plt.xlabel("Altura(m)")
+# plt.ylabel("Densidade do ar (kg/m3))")
+# plt.show()
 
 
